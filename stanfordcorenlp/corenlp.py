@@ -210,6 +210,12 @@ class StanfordCoreNLP:
         return [(dep['dep'], dep['governor'], dep['dependent']) for s in r_dict['sentences'] for dep in
                 s['basicDependencies']]
 
+    def openIE(self, sentence):
+        r_dict = self._request('openie', sentence)
+        return [(ie['subject'],ie['relation'],ie['object'],ie['subjectSpan'],ie['relationSpan'],ie['objectSpan']) for s in r_dict['sentences'] for ie in
+                s['openie']]
+##        return [('test','test','test')]
+##
     def switch_language(self, language="en"):
         self._check_language(language)
         self.lang = language
