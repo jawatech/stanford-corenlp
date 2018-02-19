@@ -212,7 +212,7 @@ class StanfordCoreNLP:
 
     def openIE(self, sentence):
         r_dict = self._request('openie', sentence)
-        return [[ie['subject'],ie['relation'],ie['object'],ie['subjectSpan'],ie['relationSpan'],ie['objectSpan']] for s in r_dict['sentences'] for ie in
+        return [ie for s in r_dict['sentences'] for ie in
                 s['openie']]
 ##        return [('test','test','test')]
 ##
