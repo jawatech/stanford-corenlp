@@ -191,6 +191,12 @@ class StanfordCoreNLP:
                 tags.append(token['pos'])
         return list(zip(words, tags))
 
+    def posTag(self, sentence):
+        r_dict = self._request('pos', sentence)
+        words = []
+        tags = []
+        return [token for s in r_dict['sentences'] for token in s['tokens']]
+
     def ner(self, sentence):
         r_dict = self._request('ner', sentence)
         words = []
@@ -208,6 +214,11 @@ class StanfordCoreNLP:
     def dependency_parse(self, sentence):
         r_dict = self._request('depparse', sentence)
         return [(dep['dep'], dep['governor'], dep['dependent']) for s in r_dict['sentences'] for dep in
+                s['basicDependencies']]
+
+    def dependencyParse(self, sentence):
+        r_dict = self._request('depparse', sentence)
+        return [dep for s in r_dict['sentences'] for dep in
                 s['basicDependencies']]
 
     def openIE(self, sentence):
